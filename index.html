@@ -25,10 +25,6 @@
       <li class="list-group-item" id="humidity"></li>
       <li class="list-group-item" id="windspeed"></li>
     </ul>
-    <div class="card-body">
-      <a href="" class="celsius">celsius</a>
-      <a href="" class="farenheit">farenheit</a>
-    </div>
   </div>
   </br>
     <img src="images/world.jpg" alt="picture" class="world" id="world" />
@@ -79,41 +75,28 @@
             axios.get(apiUrl).then(displayWeatherWeek);
 
         }
-        function showCelsius(event) {
-            event.preventDefault();
-            let temp = celsiusTemp;
-            let h2 = document.querySelector("h2");
-            h2.innerHTML = "It is " + temp + " degrees celsius"
-          }
-    
-          function showFarenheit(event) {
-            event.preventDefault();
-            let temp = (celsiusTemp * 9) / 5 + 32;
-            let h2 = document.querySelector("h2");
-            h2.innerHTML = "It is " + temp + " degrees farenheit"
+
+          function formatDay(timestamp) {
+            let date = new Date(timestamp * 1000);
+            let day = date.getDay();
+            let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            return days[day];
           }
 
           function displayWeatherWeek(response) {
-            console.log(response.data);
+            let forecast = response.data.daily;
             let forecastWeek = document.querySelector("#container");
-            let forecast = '<div class="row">'
-            let days = ["Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun"];
-            days.forEach(function (day) {
-              forecast = forecast + '<div class="col-1">${Day}</br><img src="" alt="" /></br><span id=high_temp>high </span><span id=low_temp>low</span></div>';
-            });
-            forecast = forecast + '</div>';
-            forecastWeek.innerHTML = forecast;}
+            let weeklyForecast = '<div class="row">'
+            forecast.forEach(function (forecastDay, index) { if (index < 6) {
+              weeklyForecast = weeklyForecast + `<div class="col-2">${formatDay(forecastDay.dt)}</br><img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" /></br><span id=high_temp> ${Math.round(forecastDay.temp.max)} </span><span id=low_temp>${Math.round(forecastDay.temp.min)}</span></div>`;
+            }});
+            weeklyForecast = weeklyForecast + '</div>';
+            forecastWeek.innerHTML = weeklyForecast;}
     
           let celsiusTemp = null;
 
           let cityForm = document.querySelector("#city-form");
           cityForm.addEventListener("submit", showCity);
-    
-          let celsius = document.querySelector(".celsius");
-          celsius.addEventListener("click", showCelsius);
-    
-          let farenheit = document.querySelector(".farenheit");
-          farenheit.addEventListener("click", showFarenheit);
     
     
         </script>
