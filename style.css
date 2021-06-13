@@ -15,8 +15,9 @@ form {
     margin: 20px auto;
 }
 
-.container {
+.weather_week {
     display: none;
+    text-align: center;
 }
 
 h1 {

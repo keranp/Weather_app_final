@@ -14,42 +14,44 @@
     <title>Weather</title>
 </head>
 <body>
-    <img src="images/world.jpg" alt="picture" class="world" />
+  <div class="card" id="card" style="width: 18rem;">
+    <img src="" alt="" class="" id="icon" />
+    <div class="card-body">
+      <h1 class="city"></h1>
+      <h2 class="temp"></h2>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" id="description"></li>
+      <li class="list-group-item" id="humidity"></li>
+      <li class="list-group-item" id="windspeed"></li>
+    </ul>
+    <div class="card-body">
+      <a href="" class="celsius">celsius</a>
+      <a href="" class="farenheit">farenheit</a>
+    </div>
+  </div>
+  </br>
+    <img src="images/world.jpg" alt="picture" class="world" id="world" />
     <form id="city-form"> 
       <input type="city" id="city-input" placeholder="Enter a City">
         <input type="submit" value="Search" />
     </form>
-<div class="card" id="card" style="width: 18rem;">
-  <img src="" alt="" class="" id="icon" />
-  <div class="card-body">
-    <h1 class="city"></h1>
-    <h2 class="temp"></h2>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" id="description"></li>
-    <li class="list-group-item" id="humidity"></li>
-    <li class="list-group-item" id="windspeed"></li>
-  </ul>
-  <div class="card-body">
-    <a href="" class="celsius">celsius</a>
-    <a href="" class="farenheit">farenheit</a>
-  </div>
-</div>
-<div class="container" id="container">
+  </br>
+<div class="weather_week" id="container">
     <div class="row">
-      <div class="col-2">
+      <div class="col-1">
         Mon
         <div class="col-12">
-            🌞
+          <img src="" alt="" />
             <div class="col-12">
-                28 degrees
+                high: low:
               </div>
           </div>
       </div>
       <div class="col-2">
         Tues
         <div class="col-12">
-            🌞
+          <img src="" alt="" />
             <div class="col-12">
                 28 degrees
               </div>
@@ -58,7 +60,7 @@
       <div class="col-2">
         Weds
         <div class="col-12">
-            🌞
+          <img src="" alt="" />
             <div class="col-12">
                 28 degrees
               </div>
@@ -67,7 +69,7 @@
       <div class="col-2">
         Thurs
         <div class="col-12">
-            🌞
+          <img src="" alt="" />
             <div class="col-12">
                 28 degrees
               </div>
@@ -76,16 +78,16 @@
       <div class="col-2">
         Fri
         <div class="col-12">
-            🌞
+          <img src="" alt="" />
             <div class="col-12">
                 28 degrees
               </div>
           </div>
       </div>
-      <div class="col-1">
+      <div class="col-2">
         Sat
         <div class="col-12">
-            🌞
+          <img src="" alt="" />
             <div class="col-12">
                 28 degrees
               </div>
@@ -94,7 +96,7 @@
       <div class="col-1">
         Sun
         <div class="col-12">
-            🌞
+          <img src="" alt="" />
             <div class="col-12">
                 28 degrees
               </div>
@@ -106,6 +108,7 @@
 
     function showCity(event) {
             event.preventDefault();
+            document.getElementById("world").style.display="none";
             document.getElementById("card").style.display="block";
             document.getElementById("container").style.display="block";
             let cityInput = document.querySelector("#city-input");
