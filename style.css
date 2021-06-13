@@ -18,6 +18,7 @@ form {
 .weather_week {
     display: none;
     text-align: center;
+    margin: 20px auto;
 }
 
 h1 {
@@ -26,4 +27,8 @@ h1 {
 
 h2 {
     font-size: 1rem;
+}
+
+#low_temp {
+    opacity: 0.6;
 }

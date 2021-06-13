@@ -38,71 +38,6 @@
     </form>
   </br>
 <div class="weather_week" id="container">
-    <div class="row">
-      <div class="col-1">
-        Mon
-        <div class="col-12">
-          <img src="" alt="" />
-            <div class="col-12">
-                high: low:
-              </div>
-          </div>
-      </div>
-      <div class="col-2">
-        Tues
-        <div class="col-12">
-          <img src="" alt="" />
-            <div class="col-12">
-                28 degrees
-              </div>
-          </div>
-      </div>
-      <div class="col-2">
-        Weds
-        <div class="col-12">
-          <img src="" alt="" />
-            <div class="col-12">
-                28 degrees
-              </div>
-          </div>
-      </div>
-      <div class="col-2">
-        Thurs
-        <div class="col-12">
-          <img src="" alt="" />
-            <div class="col-12">
-                28 degrees
-              </div>
-          </div>
-      </div>
-      <div class="col-2">
-        Fri
-        <div class="col-12">
-          <img src="" alt="" />
-            <div class="col-12">
-                28 degrees
-              </div>
-          </div>
-      </div>
-      <div class="col-2">
-        Sat
-        <div class="col-12">
-          <img src="" alt="" />
-            <div class="col-12">
-                28 degrees
-              </div>
-          </div>
-      </div>
-      <div class="col-1">
-        Sun
-        <div class="col-12">
-          <img src="" alt="" />
-            <div class="col-12">
-                28 degrees
-              </div>
-          </div>
-      </div>
-    </div>
   </div>
   <script>
 
@@ -118,6 +53,7 @@
         let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
         axios.get(url).then(currentTemp);
           }
+
     
           function currentTemp(response) {
             let temp = Math.round(response.data.main.temp);
@@ -135,8 +71,14 @@
             humid.innerHTML = "Humidity: " + humidity + "%"
             let icon = document.querySelector("#icon");
             icon.setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.weather[0].icon + "@2x.png")
+
+            let lon = response.data.coord.lon;
+            let lat = response.data.coord.lat;
+            let apiKey = "b88eabe092495ecc2cc1a7f39638c8a7";
+            let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+            axios.get(apiUrl).then(displayWeatherWeek);
+
         }
-    
         function showCelsius(event) {
             event.preventDefault();
             let temp = celsiusTemp;
@@ -150,9 +92,20 @@
             let h2 = document.querySelector("h2");
             h2.innerHTML = "It is " + temp + " degrees farenheit"
           }
+
+          function displayWeatherWeek(response) {
+            console.log(response.data);
+            let forecastWeek = document.querySelector("#container");
+            let forecast = '<div class="row">'
+            let days = ["Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun"];
+            days.forEach(function (day) {
+              forecast = forecast + '<div class="col-1">${Day}</br><img src="" alt="" /></br><span id=high_temp>high </span><span id=low_temp>low</span></div>';
+            });
+            forecast = forecast + '</div>';
+            forecastWeek.innerHTML = forecast;}
     
           let celsiusTemp = null;
-          
+
           let cityForm = document.querySelector("#city-form");
           cityForm.addEventListener("submit", showCity);
     
